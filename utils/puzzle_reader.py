@@ -3,15 +3,15 @@ import os, sys, glob, re
 
 class PuzzleReader:
     @staticmethod
-    def get_puzzle_input(day_num):
-        return [line.strip() for line in open(f"{PuzzleReader.get_path()}/data/day{day_num:02d}/puzzle_input.txt", "r").readlines()]
+    def get_puzzle_input(day_num, is_raw):
+        return [line.strip("\n") if is_raw else line.strip() for line in open(f"{PuzzleReader.get_path()}/data/day{day_num:02d}/puzzle_input.txt", "r").readlines()]
 
     @staticmethod
-    def get_test_input(day_num):
+    def get_test_input(day_num, is_raw):
         inputs = []
         for name in sorted(glob.glob(f"{PuzzleReader.get_path()}/data/day{day_num:02d}/*")):
             if len(re.findall(r"^test_\d+_input.txt$", os.path.basename(name))):
-                inputs += [[line.strip() for line in open(name, "r").readlines()]]
+                inputs += [[line.strip("\n") if is_raw else line.strip() for line in open(name, "r").readlines()]]
         return inputs
 
     @staticmethod

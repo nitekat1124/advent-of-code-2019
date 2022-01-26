@@ -11,6 +11,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -d day_number, --day day_number
                         Required, day number of the AoC event
-  -p part_number, --part  part_number
+  -p part_number, --part part_number
                         Required, part number of the day of the AoC event
+  --raw                 Optional, use raw input instead of stripped input
 ```
