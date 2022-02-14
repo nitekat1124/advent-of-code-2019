@@ -32,29 +32,46 @@ class Solution(SolutionBase):
         pattern = [0, 1, 0, -1]
 
         for _ in range(100):
-            nn = []
+            nums_new = []
             for i in range(len(nums)):
-                np = []
-                for k in pattern:
-                    np.extend([k] * (i + 1))
-                t = math.ceil(len(nums) / len(np)) + 1
-                np = np * t
-                np = np[1 : len(nums) + 1]
+                pattern_new = []
+                for p in pattern:
+                    pattern_new.extend([p] * (i + 1))
+                times = math.ceil(len(nums) / len(pattern_new)) + 1
+                pattern_new = pattern_new * times
+                pattern_new = pattern_new[1 : len(nums) + 1]
 
-                nn += [int(str(sum(a * b for a, b in zip(nums, np)))[-1])]
+                nums_new += [abs(sum(a * b for a, b in zip(nums, pattern_new))) % 10]
+            nums = nums_new
 
-            nums = nn
-        return "".join(str(i) for i in nums)[:8]
+        return "".join(map(str, nums[:8]))
 
     def part2(self, data):
+        """
+        looking at the input signals and the offset
+        we can find the pattern that start from the offset will be
+        [1, 1, 1, 1, 1, 1, 1 ......]
+        [0, 1, 1, 1, 1, 1, 1 ......]
+        [0, 0, 1, 1, 1, 1, 1 ......]
+        [0, 0, 0, 1, 1, 1, 1 ......]
+        [0, 0, 0, 0, 1, 1, 1 ......]
+        and so on
+        so the solution is trivial
+        """
         offset = int(data[0][:7])
-        nums = ([*map(int, data[0])] * 10000)[offset:]
-        for i in range(100):
+        org_length = len(data[0]) * 10000
+        offset2 = org_length - offset
+        times = math.ceil(offset2 / 10000) * 10000
+
+        nums = ([*map(int, data[0])] * times)[-offset2:]
+
+        for _ in range(100):
             nums_new = []
-            nums_sum = sum(nums)
+            offset_sum = sum(nums)
             for x in range(len(nums)):
                 if x > 0:
-                    nums_sum -= nums[x - 1]
-                nums_new += [int(str(nums_sum)[-1])]
+                    offset_sum -= nums[x - 1]
+                nums_new += [abs(offset_sum) % 10]
             nums = nums_new
-        return "".join(str(i) for i in nums[:8])
+
+        return "".join(map(str, nums[:8]))
