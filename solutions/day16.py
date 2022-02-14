@@ -30,18 +30,20 @@ class Solution(SolutionBase):
     def part1(self, data):
         nums = [*map(int, data[0])]
         pattern = [0, 1, 0, -1]
+        len_nums = len(nums)
 
         for _ in range(100):
             nums_new = []
-            for i in range(len(nums)):
+            for i in range(len_nums):
                 pattern_new = []
                 for p in pattern:
                     pattern_new.extend([p] * (i + 1))
-                times = math.ceil(len(nums) / len(pattern_new)) + 1
+                times = math.ceil(len_nums / len(pattern_new)) + 1
                 pattern_new = pattern_new * times
-                pattern_new = pattern_new[1 : len(nums) + 1]
+                pattern_new = pattern_new[1 : len_nums + 1]
 
-                nums_new += [abs(sum(a * b for a, b in zip(nums, pattern_new))) % 10]
+                # nums_new += [abs(sum(a * b for a, b in zip(nums, pattern_new))) % 10]
+                nums_new += [abs(sum(nums[x] * pattern_new[x] for x in range(len_nums))) % 10]
             nums = nums_new
 
         return "".join(map(str, nums[:8]))
@@ -64,11 +66,12 @@ class Solution(SolutionBase):
         times = math.ceil(offset2 / 10000) * 10000
 
         nums = ([*map(int, data[0])] * times)[-offset2:]
+        len_nums = len(nums)
 
         for _ in range(100):
             nums_new = []
             offset_sum = sum(nums)
-            for x in range(len(nums)):
+            for x in range(len_nums):
                 if x > 0:
                     offset_sum -= nums[x - 1]
                 nums_new += [abs(offset_sum) % 10]
