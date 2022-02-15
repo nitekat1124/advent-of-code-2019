@@ -17,7 +17,7 @@ def main():
     else:
         print(f"Solving day {args.day} part {args.part}\n")
         sol = importlib.import_module(f"solutions.day{args.day:02d}").Solution(args.day, args.raw)
-        print("the answer is", sol.solve(part_num=args.part))
+        print(f"the answer is {answer}\n" if (answer := sol.solve(part_num=args.part)) is not None else "")
 
 
 if __name__ == "__main__":
