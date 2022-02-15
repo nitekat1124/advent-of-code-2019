@@ -1,5 +1,5 @@
 from collections import deque
-from utils.intcode import Amp, Status
+from utils.intcode import Amp
 from utils.solution_base import SolutionBase
 
 
@@ -101,7 +101,7 @@ class Solution(SolutionBase):
 
             # check left
             amp.inputs += [rel_dir[facing]["left"]]
-            amp.status = Status.RUNNING
+            amp.set_status_running()
             lft = [*amp.run()][-1]
 
             next_pos = tuple(i + j for i, j in zip(pos, directions[rel_dir[facing]["left"]]))
@@ -110,7 +110,7 @@ class Solution(SolutionBase):
                 # print("left is wall, looking front")
                 # check front
                 amp.inputs += [rel_dir[facing]["front"]]
-                amp.status = Status.RUNNING
+                amp.set_status_running()
                 frnt = [*amp.run()][-1]
 
                 next_pos = tuple(i + j for i, j in zip(pos, directions[rel_dir[facing]["front"]]))
@@ -119,7 +119,7 @@ class Solution(SolutionBase):
                     # print("front is wall, looking right")
                     # check right
                     amp.inputs += [rel_dir[facing]["right"]]
-                    amp.status = Status.RUNNING
+                    amp.set_status_running()
                     rght = [*amp.run()][-1]
 
                     next_pos = tuple(i + j for i, j in zip(pos, directions[rel_dir[facing]["right"]]))
