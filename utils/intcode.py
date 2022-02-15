@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 class Status:
     RUNNING = 1
     WAIT = 2
@@ -5,13 +8,19 @@ class Status:
 
 
 class Amp:
-    def __init__(self, insts_raw, phase):
-        self.insts = [*map(int, insts_raw.split(","))] + [0] * 1000
-        self.phase = phase
+    def __init__(self, insts_raw, phase=None):
+        # self.insts = [*map(int, insts_raw.split(","))] + [0] * 1000
+        self.insts = defaultdict(int)
+        for i, n in enumerate(insts_raw.split(",")):
+            self.insts[i] = int(n)
+
         self.status = Status.RUNNING
         self.pntr = 0
-        self.inputs = [phase]
         self.base = 0
+        self.inputs = []
+        self.phase = phase
+        if phase is not None:
+            self.inputs += [phase]
 
     def run(self):
         while self.status == Status.RUNNING:
@@ -85,3 +94,15 @@ class Amp:
                 self.pntr += 1
             else:
                 raise Exception(f"unknown opcode: {opcode}")
+
+    def is_running(self):
+        return self.status == Status.RUNNING
+
+    def is_waiting(self):
+        return self.status == Status.WAIT
+
+    def is_halt(self):
+        return self.status == Status.HALT
+
+    def set_status_running(self):
+        self.status = Status.RUNNING

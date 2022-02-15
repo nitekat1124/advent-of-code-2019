@@ -1,5 +1,5 @@
 from collections import defaultdict
-from utils.intcode import Amp, Status
+from utils.intcode import Amp
 from utils.solution_base import SolutionBase
 
 
@@ -38,16 +38,16 @@ class Solution(SolutionBase):
         amp = Amp(data[0], 0)
         while 1:
             amp.inputs = [panels[pos]]
-            amp.status = Status.RUNNING
+            amp.set_status_running()
             outputs = [*amp.run()]
-            if amp.status == Status.HALT:
+            if amp.is_halt():
                 break
             panels[pos] = outputs[-1]  # paint
 
             amp.inputs += [outputs[-1]]
-            amp.status = Status.RUNNING
+            amp.set_status_running()
             outputs = [*amp.run()]
-            if amp.status == Status.HALT:
+            if amp.is_halt():
                 break
             facing = (facing + dirs[outputs[-1]] + 4) % 4
             pos = (pos[0] + turn[facing][0], pos[1] + turn[facing][1])
@@ -67,16 +67,16 @@ class Solution(SolutionBase):
 
         while 1:
             amp.inputs = [panels[pos]]
-            amp.status = Status.RUNNING
+            amp.set_status_running()
             outputs = [*amp.run()]
-            if amp.status == Status.HALT:
+            if amp.is_halt():
                 break
             panels[pos] = outputs[-1]  # paint
 
             amp.inputs += [outputs[-1]]
-            amp.status = Status.RUNNING
+            amp.set_status_running()
             outputs = [*amp.run()]
-            if amp.status == Status.HALT:
+            if amp.is_halt():
                 break
             facing = (facing + dirs[outputs[-1]] + 4) % 4
             pos = (pos[0] + turn[facing][0], pos[1] + turn[facing][1])

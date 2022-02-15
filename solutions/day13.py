@@ -1,4 +1,4 @@
-from utils.intcode import Amp, Status
+from utils.intcode import Amp
 from utils.solution_base import SolutionBase
 
 
@@ -34,9 +34,9 @@ class Solution(SolutionBase):
         while 1:
             if output is not None:
                 amp.inputs = [output]
-            amp.status = Status.RUNNING
+            amp.set_status_running()
             outputs = [*amp.run()]
-            if amp.status == Status.HALT:
+            if amp.is_halt():
                 break
             output = outputs[-1]
             tile_data += [output]
@@ -57,9 +57,9 @@ class Solution(SolutionBase):
         while 1:
             if output is not None:
                 amp.inputs = [output]
-            amp.status = Status.RUNNING
+            amp.set_status_running()
             outputs = [*amp.run()]
-            if amp.status == Status.HALT:
+            if amp.is_halt():
                 break
             output = outputs[-1]
             tile_data += [output]
