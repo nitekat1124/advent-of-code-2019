@@ -1,0 +1,13 @@
+                                                                                         Sick Bay
+                                                                                            |
+    (wreath) Stables -- Engineering -- Security Checkpoint                               Hallway (hologram)
+                |                                                                           |
+ (fuel cell) Holodeck ------------------------------------------------------------------ Observatory (manifold)
+                |                                                                           |
+             Kitchen -- Hot Chocolate Fountain      (boulder) Arcade ------------------- Navigation
+                           |                                    |                           |
+          (fixed point) Corridor              Warp Drive Maintenance      Science Lab -- Hull Breach
+                                                                                 |          |
+                                                                   (polygon) Passages    Crew Quarters
+                                                                                 |          |
+                                                                 Gift Wrapping Center    Storage (tambourine)
