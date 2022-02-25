@@ -1,5 +1,5 @@
-                                                                                         Sick Bay
-                                                                                            |
+                                       Pressure-Sensitive Floor                          Sick Bay
+                                          |                                                 |
     (wreath) Stables -- Engineering -- Security Checkpoint                               Hallway (hologram)
                 |                                                                           |
  (fuel cell) Holodeck ------------------------------------------------------------------ Observatory (manifold)
